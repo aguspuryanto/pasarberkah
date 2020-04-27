@@ -1,0 +1,7 @@
+{
+  "name": "pigishop2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "ionic-angular"
+}
