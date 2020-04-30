@@ -1,14 +1,73 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="goToCart()" >
+        <ion-icon name="cart"> {{cartCount}} </ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>PASARBERKAH</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v3">docs</a> will be your guide.
-  </p>
+<ion-content>  
+  
+  <div class="header-banner">
+    <ion-slides class="home-slide" autoplay="5000" loop="true" speed="500" class="slides" pager="true">
+      <ion-slide>
+         <ion-card>
+          <!-- <img src="img/card-saopaolo.png"/> -->
+          <ion-card-header>
+            <ion-card-title class="card-title">Slide 1</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>Madison, WI</ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <!-- <img src="img/card-saopaolo.png"/> -->
+          <ion-card-header>
+            <ion-card-title class="card-title">Slide 1</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>Madison, WI</ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <!-- <img src="img/card-saopaolo.png"/> -->
+          <ion-card-header>
+            <ion-card-title class="card-title">Slide 1</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>Madison, WI</ion-card-content>
+        </ion-card>
+      </ion-slide>
+      <ion-slide>
+        <ion-card>
+          <!-- <img src="img/card-saopaolo.png"/> -->
+          <ion-card-header>
+            <ion-card-title class="card-title">Slide 1</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>Madison, WI</ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+
+  <ion-searchbar [(ngModel)]="filterText" (ionInput)="getItems()" ></ion-searchbar>
+
+  <ion-list inset>
+    <ion-list-header>Product</ion-list-header>
+    <ion-grid>
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" col-6 class="product-col" *ngFor="let product of products" (click)="itemTapped($event,product)">
+          <ion-card>
+              <ionic-image-cache *ngIf="product.productImg" [showPreview]="'false'" [src]="product.productImg"></ionic-image-cache>
+              <ion-card-content>
+                  <ion-card-title text-wrap style="font-size: 1.4rem;">{{product.productName}}</ion-card-title>
+                  <div item-right>Rp. {{product.unitPrice | number }} </div>
+              </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
 </ion-content>
