@@ -12,15 +12,15 @@ import { LoadingController } from 'ionic-angular';
 @Injectable()
 export class ProductService {
   loading : any;
-  prod: boolean = false;
-  // apiUrl: string;
+  prod: boolean = true;
+  apiUrl: string;
 
   constructor(
     public loadingCtrl: LoadingController, 
     private http: Http,
-    @Inject('apiUrl') private apiUrl
+    // @Inject('apiUrl') private apiUrl
     ) {
-      // this.apiUrl = (this.prod==true) ? 'http://mysod.xyz/pasarberkah/' : 'http://localhost/evoush/';
+      this.apiUrl = (this.prod==true) ? 'http://mysod.xyz/pasarberkah/' : 'http://localhost/evoush/';
     }
 
   async loadingshow(){
