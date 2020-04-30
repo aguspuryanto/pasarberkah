@@ -1,0 +1,7 @@
+page-shopping-cart {
+    .item-block { border: 1px solid #ddd; border-bottom: none; }
+    .item-block:last-child { border-bottom: 1px solid #ddd; }
+    .item-inner { border-bottom: none !important; }
+
+    .list-md[inset] { margin: 0px; }
+}

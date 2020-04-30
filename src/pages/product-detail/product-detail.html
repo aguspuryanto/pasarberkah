@@ -1,0 +1,32 @@
+
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>product-detail</ion-title>
+
+  <ion-buttons end>
+      <button ion-button (click)="goToCart()" >
+          <ion-icon name="cart"> {{cartCount}} </ion-icon>
+        </button>
+  </ion-buttons>
+</ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ionic-image-cache *ngIf="selectedProduct.productImg" [showPreview]="'false'" [src]="selectedProduct.productImg"></ionic-image-cache>
+    <ion-card-content>
+      <ion-card-title> {{selectedProduct.productName}} </ion-card-title>
+      <h3>Rp. {{selectedProduct.unitPrice | number }} </h3>
+      <div>
+        <button ion-button color="secondary" (click)="chatSeller(selectedProduct)" full>
+          <ion-icon name="chatboxes">Tanya Penjual</ion-icon>
+        </button>
+        <button ion-button (click)="addToCart(selectedProduct)" full>
+          <ion-icon name="basket">Beli Sekarang</ion-icon>
+        </button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

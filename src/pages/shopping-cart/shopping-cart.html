@@ -1,0 +1,95 @@
+<ion-header>
+    <ion-navbar >
+      <button ion-button menuToggle left >
+        <ion-icon name="menu"></ion-icon>
+      </button>
+      <ion-title>Shopping Cart</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <p *ngIf="cartItems.length==0">Your Cart is Empty</p>
+  <ion-list>
+    <ion-item *ngFor="let item of cartItems">
+      <ion-thumbnail item-left>
+        <img src="{{item.product.productImg}}" />
+      </ion-thumbnail>
+      <h2>{{item.product.productName}}</h2>
+      <p>{{item.quantity}} x {{item.product.unitPrice | number}}</p>
+    </ion-item>
+  </ion-list>
+
+  <ion-list *ngIf="cartItems.length">
+    <ion-item>
+      <h2>Total Belanja : {{ cartTotal | number }}</h2>
+    </ion-item>
+  </ion-list>
+
+  <form #registerForm="ngForm" *ngIf="cartItems.length" (ngSubmit)="register()" autocomplete="off">
+    <!-- <ion-row>
+      <ion-col> -->
+        <h4 margin-top>Isikan Data Anda</h4>
+        <ion-list>
+          <ion-item>
+            <ion-label stacked>Nama Lengkap</ion-label>
+            <ion-input name="owner_outlet" type="text" required [(ngModel)]="owner_outlet" #setfullname></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>No WA/HP</ion-label>
+            <ion-input type="number" pattern="[0-9]*" name="telp_outlet" required [(ngModel)]="telp_outlet"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Alamat Lengkap</ion-label>
+            <ion-textarea [(ngModel)]="alamat_outlet" name="alamat_outlet"></ion-textarea>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Kabupaten/Kota</ion-label>
+            <ion-select placeholder="Kabupaten/Kota" [(ngModel)]="id_kota" name="id_kota" (ionChange)="onSelectKab($event)">
+              <ion-option *ngFor="let city of citys" [value]="city.city_id">{{city.type}} {{city.city_name}}</ion-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label stacked>Kecamatan</ion-label>
+            <ion-select placeholder="Kecamatan" [(ngModel)]="id_kecamatan" name="id_kecamatan">
+              <ion-option *ngFor="let kec of kecamatans" [value]="kec.id">{{kec.nama}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-list>
+      <!-- </ion-col>
+    </ion-row> -->
+
+    <ion-row>
+      <ion-col>
+        <h4 margin-top>Pilih Pembayaran</h4>
+        <ion-list radio-group [(ngModel)]="paymentValue" [ngModelOptions]="{standalone: true}" (ionChange)="getPayment($event)">
+            <ion-item>
+              <ion-label stacked>
+                <h3>COD (Bayar Di Tempat)</h3>
+                <p>Biaya {{costCodText}} Rp{{costCod}}</p>
+              </ion-label>
+              <ion-radio slot="start" value="cod" checked></ion-radio>
+            </ion-item>
+            <ion-item>
+              <ion-label stacked>
+                <h3>Bank Transfer</h3>
+                <p>Kode Unik Rp{{costBank}}</p></ion-label>
+              <ion-radio slot="start" value="transfer"></ion-radio>
+            </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-grid *ngIf="cartItems.length">
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button (click)="goChekout()" full>
+          <ion-icon name="basket">Chekout</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>
