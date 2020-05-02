@@ -19,41 +19,47 @@ export class MyApp {
       splashScreen.hide();
     });
 
-    platform.registerBackButtonAction(() => {
- 
-      let nav = app.getActiveNavs()[0];
-      let activeView = nav.getActive();                
-   
-      //this will not work in signed version using Lazy load use activeView.id instead
-      if(activeView.component.name === "HomePage") {
-   
-          // canGoBack check if these's and view in nav stack
-          if (nav.canGoBack()){ 
-              nav.pop();
-          } else {
-              let alert = this.alertCtrl.create({
-                title: 'Exit Application?',
-                message: 'Do you want to exit the application?',
-                buttons: [
-                  {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    handler: () => {
-                      console.log('Cancel clicked');
-                    }
-                  },
-                  {
-                    text: 'Exit',
-                    handler: () => {
-                      console.log('Exit clicked');
-                    }
-                  }
-                ]
-              });
-              alert.present();
-          }
+    platform.registerBackButtonAction(() => { 
+      let nav = app._appRoot._getActivePortal() || app.getActiveNav();
+      let activeView = nav.getActive().instance;
+
+      if (activeView != null) {
+        if (nav.canGoBack()) {
+            if (activeView instanceof HomePage) {
+              // do something
+              this.confirmExit();
+            } else {
+	           nav.pop();
+            }
+        } else if (activeView.isOverlay) {
+          activeView.dismiss();
+        } else {          
+          this.confirmExit();
+        }
       }
     });
+  }
+
+  confirmExit(){
+    // navigator['app'].exitApp();
+    let alert = this.alertCtrl.create({
+      title: 'Ionic App',
+      message: 'Do you want to close the app?',
+      buttons: [{
+        text: 'Cancel',
+        role: 'cancel',
+        handler: () => {
+          console.log('Application exit prevented!');
+        }
+      },
+      {
+        text: 'Close',
+        handler: () => {
+          navigator['app'].exitApp();
+        }
+      }]
+    });
+    alert.present();
   }
 }
 

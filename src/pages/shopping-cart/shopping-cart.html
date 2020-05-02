@@ -25,22 +25,22 @@
     </ion-item>
   </ion-list>
 
-  <form #registerForm="ngForm" *ngIf="cartItems.length" (ngSubmit)="register()" autocomplete="off">
+  <form #registerForm="ngForm" *ngIf="cartItems.length" autocomplete="off">
     <!-- <ion-row>
       <ion-col> -->
         <h4 margin-top>Isikan Data Anda</h4>
         <ion-list>
           <ion-item>
             <ion-label stacked>Nama Lengkap</ion-label>
-            <ion-input name="owner_outlet" type="text" required [(ngModel)]="owner_outlet" #setfullname></ion-input>
+            <ion-input name="nama_pembeli" type="text" required [(ngModel)]="nama_pembeli" #setfullname></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>No WA/HP</ion-label>
-            <ion-input type="number" pattern="[0-9]*" name="telp_outlet" required [(ngModel)]="telp_outlet"></ion-input>
+            <ion-input type="number" pattern="[0-9]*" name="tlp_pembeli" required [(ngModel)]="tlp_pembeli"></ion-input>
           </ion-item>
           <ion-item>
             <ion-label stacked>Alamat Lengkap</ion-label>
-            <ion-textarea [(ngModel)]="alamat_outlet" name="alamat_outlet"></ion-textarea>
+            <ion-textarea [(ngModel)]="alamat_pembeli" name="alamat_pembeli"></ion-textarea>
           </ion-item>
           <ion-item>
             <ion-label stacked>Kabupaten/Kota</ion-label>
@@ -78,11 +78,18 @@
         </ion-list>
       </ion-col>
     </ion-row>
+    <ion-row *ngIf="cartItems.length">
+      <ion-col col-12>
+        <button ion-button (click)="goChekout()" full>
+          <ion-icon name="basket">Chekout</ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
   </form>
 
 </ion-content>
 
-<ion-footer>
+<!-- <ion-footer>
   <ion-grid *ngIf="cartItems.length">
     <ion-row>
       <ion-col col-12>
@@ -92,4 +99,4 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-</ion-footer>
+</ion-footer> -->

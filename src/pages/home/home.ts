@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, NgZone } from '@angular/core';
 import { NavController, Platform, App, NavParams, LoadingController } from 'ionic-angular';
 
 import { CartService } from "./../../providers/cart.service";
@@ -11,9 +11,12 @@ import { ProductService } from "../../providers/product.service";
 import { Http } from "@angular/http";
 // import { IonicImageCacheModule } from 'ionic3-image-cache';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
+import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
 
 import { ShoppingCartPage } from "./../shopping-cart/shopping-cart";
 import { ProductDetailPage } from "./../product-detail/product-detail";
+
+declare var google;
 
 @Component({
   selector: 'page-home',
@@ -23,6 +26,10 @@ import { ProductDetailPage } from "./../product-detail/product-detail";
 export class HomePage {
   // This property will save the callback which we can unsubscribe when we leave this view
   public unsubscribeBackEvent: any;
+
+  latitude: any = 0; //latitude
+  longitude: any = 0; //longitude
+  address: string;
   options: GeolocationOptions;
 
   products: Product[] = [];
@@ -38,12 +45,14 @@ export class HomePage {
     public platform: Platform, 
     public navCtrl: NavController, 
     public app: App,
+    public zone: NgZone,
     public navParams: NavParams,
     public productService: ProductService,
     public categoryService: CategoryService,
     public cartService: CartService,
     public loadingController: LoadingController,
     public geolocation: Geolocation,
+    private nativeGeocoder: NativeGeocoder,
     public http: Http, @Inject('apiUrl') private apiUrl
   ) {
     this.getLocation();
@@ -93,15 +102,85 @@ export class HomePage {
   }
 
   getLocation(){
-    this.options =  {
-      enableHighAccuracy: true
+    this.options = {
+      timeout: 10000, 
+      enableHighAccuracy: true, 
+      maximumAge: 3600
     }
 
     this.geolocation.getCurrentPosition(this.options).then((resp: Geoposition) => {
-      console.log(resp.coords.longitude + ',' + resp.coords.latitude);
+      console.log(resp)
+      this.latitude = resp.coords.latitude;
+      this.longitude = resp.coords.longitude;
+      this.getAddress(this.latitude, this.longitude);
      }).catch((error: PositionError) => {
        console.log('Error getting location', error.message);
      });
+  }
+
+  // geocoder options
+  // nativeGeocoderOptions: NativeGeocoderOptions = {
+  //   useLocale: true,
+  //   maxResults: 5
+  // };
+
+  // get address using coordinates
+  async getAddress(lat,long){
+    // if (navigator.geolocation) {
+      let options: NativeGeocoderOptions = {
+        useLocale: true,
+        maxResults: 5
+      };
+
+      if (this.platform.is('cordova')) {
+        this.nativeGeocoder.reverseGeocode(lat, long, options)
+        .then((res: NativeGeocoderReverseResult[]) => {
+          this.address = this.pretifyAddress(res[0]);
+        })
+        .catch((error: any) => {
+          console.log('Error getting location'+ JSON.stringify(error));
+          // this.getGeoLocation(lat, long);
+        });
+      }
+    // }
+  }
+
+  async getGeoLocation(lat: number, lng: number, type?) {
+    if (navigator.geolocation) {
+      let geocoder = await new google.maps.Geocoder();
+      let latlng = await new google.maps.LatLng(lat, lng);
+      let request = { latLng: latlng };
+
+      await geocoder.geocode(request, (results, status) => {
+        if (status == google.maps.GeocoderStatus.OK) {
+          let result = results[0];
+          this.zone.run(() => {
+            if (result != null) {
+              this.address = result.formatted_address;
+              if (type === 'reverseGeocode') {
+                this.address = result.formatted_address;
+              }
+            }
+          })
+        }
+      });
+
+    }
+  }
+
+  // address
+  pretifyAddress(address){
+    let obj = [];
+    let data = "";
+    for (let key in address) {
+      obj.push(address[key]);
+    }
+    obj.reverse();
+    for (let val in obj) {
+      if(obj[val].length)
+      data += obj[val]+', ';
+    }
+    return address.slice(0, -2);
   }
 
   itemTapped(event, product) {

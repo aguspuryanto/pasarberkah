@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { HomePage } from '../home/home';
+import { ShoppingCartPage } from '../shopping-cart/shopping-cart';
+import { CheckoutPage } from '../checkout/checkout';
+// import { ListPage } from '../list/list';
+// import { RegisterPage } from '../register/register';
 /**
  * Generated class for the TabsPage page.
  *
@@ -8,14 +13,21 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({ priority: 'high', segment: 'tabs' })
 @Component({
   selector: 'page-tabs',
   templateUrl: 'tabs.html',
 })
 export class TabsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  tab1Root = HomePage;
+  tab2Root = ShoppingCartPage;
+  tab3Root = CheckoutPage;
+
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
+    events.subscribe('user:logout', () => {
+      this.navCtrl.popToRoot();
+    })
   }
 
   ionViewDidLoad() {

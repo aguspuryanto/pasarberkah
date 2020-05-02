@@ -8,6 +8,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { HttpModule } from '@angular/http';
 import { IonicImageCacheModule } from 'ionic3-image-cache';
 import { Geolocation } from '@ionic-native/geolocation';
+import { NativeGeocoder } from '@ionic-native/native-geocoder';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -18,6 +19,7 @@ import { CheckoutPage } from '../pages/checkout/checkout';
 
 import { CartService } from '../providers/cart.service';
 import { ProductService } from '../providers/product.service';
+import { TabsPage } from '../pages/tabs/tabs';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { ProductService } from '../providers/product.service';
     ShoppingCartPage,
     ChatPage,
     CheckoutPage,
+    TabsPage
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { ProductService } from '../providers/product.service';
     ShoppingCartPage,
     ChatPage,
     CheckoutPage,
+    TabsPage
   ],
   providers: [
     StatusBar,
@@ -50,6 +54,7 @@ import { ProductService } from '../providers/product.service';
     CartService,
     ProductService,
     Geolocation,
+    NativeGeocoder,
     {provide: "apiUrl", useValue :"http://localhost/evoush/"},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]

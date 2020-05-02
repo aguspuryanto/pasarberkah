@@ -19,13 +19,13 @@ export class ShoppingCartPage {
   kecamatans: any = [];
   rajaongkir: any = [];
 
-  kode_outlet: string;
-  nama_outlet: string;
-  alamat_outlet: string;
+  nama_pembeli: string;
+  tlp_pembeli: string;
+  alamat_pembeli: string;
   id_provinsi: number = 11;
   id_kota: number;
   id_kecamatan: number;
-  id_desa: string;
+  // id_desa: string;
   
   cartItems:CartItem[]=[];
   cartTotal: number = 0;
@@ -55,7 +55,15 @@ export class ShoppingCartPage {
   }
 
   goChekout(){
-    this.navCtrl.push(CheckoutPage);
+    console.log('nama_pembeli', this.nama_pembeli);
+    console.log('tlp_pembeli', this.tlp_pembeli);
+    console.log('alamat_pembeli', this.alamat_pembeli);
+    console.log('id_kota', this.id_kota);
+    console.log('id_kecamatan', this.id_kecamatan);
+    console.log('paymentValue', this.paymentValue);
+    console.log('costCod', this.costCod);
+    console.log('costBank', this.costBank);
+    // this.navCtrl.push(CheckoutPage);
   }
 
   getCityJson(){
@@ -101,20 +109,20 @@ export class ShoppingCartPage {
     // origin, destination, weight=100, courier="jne"
     if(localStorage.getItem('rajaongkir')) {
       this.rajaongkir = JSON.parse(localStorage.getItem('rajaongkir'));
-      // console.log('__rajaongkir', this.rajaongkir);
+      console.log('__rajaongkir', this.rajaongkir);
     } else {
 
       var options = {
         origin: 133,
-        destination: 134,
+        destination: this.id_kota,
         weight: 100,
         courier: 'jne',
       }
 
       this.productService.getOngkir(options).then((data: any[])=> {
-        // console.log('rajaongkir', data);
         this.rajaongkir = data['rajaongkir']['results'];
-        localStorage.setItem('rajaongkir', JSON.stringify(data['rajaongkir']['results']));
+        console.log('xx_rajaongkir', this.rajaongkir);
+        localStorage.setItem('rajaongkir_' + options.destination, JSON.stringify(data['rajaongkir']['results']));
       });
 
     }
