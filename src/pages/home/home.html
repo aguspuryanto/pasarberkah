@@ -54,8 +54,13 @@
 
   <!-- <ion-searchbar [(ngModel)]="filterText" (ionInput)="getItems()" ></ion-searchbar> -->
   <p>{{ address }}</p>
-  <ion-list inset>
-    <ion-list-header>Product</ion-list-header>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Product</ion-label>
+      <button ion-button fill="clear">
+        <ion-icon name="options" slot="end"></ion-icon>
+      </button>
+    </ion-list-header>
     <ion-grid>
       <ion-row class="ion-align-items-center">
         <ion-col size="6" col-6 class="product-col" *ngFor="let product of products" (click)="itemTapped($event,product)">

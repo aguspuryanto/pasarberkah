@@ -106,32 +106,31 @@ export class ShoppingCartPage {
   }
 
   getOngkir(){
-    // origin, destination, weight=100, courier="jne"
-    if(localStorage.getItem('rajaongkir')) {
-      this.rajaongkir = JSON.parse(localStorage.getItem('rajaongkir'));
+
+    var options = {
+      origin: 133,
+      destination: ((this.id_kota!=null) ? this.id_kota : 409),
+      weight: 100,
+      courier: 'jne',
+    }
+
+    if(localStorage.getItem('rajaongkir_' + options.destination)) {
+      this.rajaongkir = JSON.parse(localStorage.getItem('rajaongkir_' + options.destination));
       console.log('__rajaongkir', this.rajaongkir);
     } else {
-
-      var options = {
-        origin: 133,
-        destination: this.id_kota,
-        weight: 100,
-        courier: 'jne',
-      }
-
       this.productService.getOngkir(options).then((data: any[])=> {
         this.rajaongkir = data['rajaongkir']['results'];
         console.log('xx_rajaongkir', this.rajaongkir);
         localStorage.setItem('rajaongkir_' + options.destination, JSON.stringify(data['rajaongkir']['results']));
       });
-
     }
     
     // costs
-    if (this.rajaongkir[0]['costs']){
-      // console.log("costs", this.rajaongkir[0]['costs'].length);
-      // console.log("cost0_service", this.rajaongkir[0]['costs'][0]['service']);
-      // console.log("cost0_val", this.rajaongkir[0]['costs'][0]['cost'][0]['value']);
+    if (this.rajaongkir){
+      console.log('xvx_rajaongkir', this.rajaongkir);
+      console.log("costs", this.rajaongkir[0]['costs'].length);
+      console.log("cost0_service", this.rajaongkir[0]['costs'][0]['service']);
+      console.log("cost0_val", this.rajaongkir[0]['costs'][0]['cost'][0]['value']);
       // this.costCodText = this.costCodText + " + " + this.rajaongkir[0]['costs'][0]['description'];
       this.costCod = this.costCod + this.rajaongkir[0]['costs'][0]['cost'][0]['value'];
     }
