@@ -11,7 +11,7 @@ import { ProductService } from "../../providers/product.service";
 import { Http } from "@angular/http";
 // import { IonicImageCacheModule } from 'ionic3-image-cache';
 import { Geolocation, GeolocationOptions, Geoposition, PositionError } from '@ionic-native/geolocation';
-import { NativeGeocoder, NativeGeocoderReverseResult, NativeGeocoderOptions } from '@ionic-native/native-geocoder';
+import { NativeGeocoder, NativeGeocoderOptions, NativeGeocoderReverseResult } from '@ionic-native/native-geocoder';
 
 import { ShoppingCartPage } from "./../shopping-cart/shopping-cart";
 import { ProductDetailPage } from "./../product-detail/product-detail";
@@ -40,6 +40,9 @@ export class HomePage {
   myClock: string;
   page: number = 1;
   noMoreData: boolean = false;
+
+  slideData = [{ 
+    image: "../../assets/data/img1.jpg" },{ image: "../../assets/data/img2.jpg" },{ image: "../../assets/data/img3.jpg" },{ image: "../../assets/data/img4.jpg" }];
 
   constructor(
     public platform: Platform, 

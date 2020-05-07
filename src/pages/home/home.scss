@@ -11,13 +11,19 @@ page-home {
     .card-title-md { margin: 0px; padding: 0; }
 
     .header-banner {
-        height:150px;
-		min-height:150px;
-    }
+        // height:150px;
+        // min-height:150px;
+        
+        .slide-zoom {
+            height: 100%;
 
-    .header-banner .slide-zoom {
-		height: 100%;
-	}
+            img {
+                width:100% !important;
+                height:100% !important;
+                border-radius: 5px;
+            }
+        }
+    }
 
     ion-slides {
         height: 150px;

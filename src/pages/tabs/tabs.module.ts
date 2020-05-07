@@ -1,32 +1,29 @@
 import { NgModule } from '@angular/core';
-// import { IonicPageModule } from 'ionic-angular';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TabsPage } from './tabs';
+// import { IonicModule } from '@ionic/angular';
+import { IonicModule } from 'ionic-angular';
 
-const routes: Routes = [
-  {
-    path: 'tabs',
-    component: TabsPage,
-    children:[
-        { path: 'tab1', loadChildren: '../home/home.module#HomePageModule' },
-        { path: 'tab2', loadChildren: '../tab2/tab2.module#Tab2PageModule' },
-    ]
-  },
-  {
-    path:'',
-    redirectTo:'/tabs/tab1',
-    pathMatch:'full'
-  }
-];
+import { TabsPageRoutingModule } from './tabs-routing.module';
+import { TabsPage } from './tabs.page';
+
+// const routes: Routes = [
+//   {
+//     path: '',
+//     component: TabsPage
+//   }
+// ];
 
 @NgModule({
-  declarations: [
-    TabsPage,
-  ],
   imports: [
-    RouterModule.forChild(routes),
-    // IonicPageModule.forChild(TabsPage),
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    TabsPageRoutingModule
+    // RouterModule.forChild(routes)
   ],
+  declarations: [TabsPage]
 })
 export class TabsPageModule {}

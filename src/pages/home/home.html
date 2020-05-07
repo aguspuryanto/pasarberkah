@@ -13,36 +13,9 @@
   
   <div class="header-banner">
     <ion-slides class="home-slide" autoplay="5000" loop="true" speed="500" class="slides" pager="true">
-      <ion-slide>
+      <ion-slide *ngFor="let slide of slideData">
          <ion-card>
-          <!-- <img src="img/card-saopaolo.png"/> -->
-          <ion-card-header>
-            <ion-card-title class="card-title">Slide 1</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>Madison, WI</ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card>
-          <!-- <img src="img/card-saopaolo.png"/> -->
-          <ion-card-header>
-            <ion-card-title class="card-title">Slide 1</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>Madison, WI</ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card>
-          <!-- <img src="img/card-saopaolo.png"/> -->
-          <ion-card-header>
-            <ion-card-title class="card-title">Slide 1</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>Madison, WI</ion-card-content>
-        </ion-card>
-      </ion-slide>
-      <ion-slide>
-        <ion-card>
-          <!-- <img src="img/card-saopaolo.png"/> -->
+          <img src="{{slide.image}}" />
           <ion-card-header>
             <ion-card-title class="card-title">Slide 1</ion-card-title>
           </ion-card-header>
