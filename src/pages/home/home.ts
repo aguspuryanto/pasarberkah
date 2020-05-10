@@ -59,6 +59,13 @@ export class HomePage {
     public http: Http, @Inject('apiUrl') private apiUrl
   ) {
     this.getLocation();
+
+    this.categories.push({categoryId:1, categoryName: 'Mamin'});
+    this.categories.push({categoryId:2, categoryName: 'Gadget'});
+    this.categories.push({categoryId:3, categoryName: 'Elektronik'});
+    this.categories.push({categoryId:4, categoryName: 'Pakaian'});
+    this.categories.push({categoryId:5, categoryName: 'Jasa'});
+    this.categories.push({categoryId:6, categoryName: 'Lainnya'});
   }
 
   //Called when view is loaded

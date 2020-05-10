@@ -3,7 +3,10 @@ import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { ShoppingCartPage } from '../shopping-cart/shopping-cart';
-import { CheckoutPage } from '../checkout/checkout';
+// import { CheckoutPage } from '../checkout/checkout';
+import { SettingPage } from '../setting/setting';
+import { TransaksiPage } from '../transaksi/transaksi';
+
 // import { ListPage } from '../list/list';
 // import { RegisterPage } from '../register/register';
 /**
@@ -22,7 +25,8 @@ export class TabsPage {
 
   tab1Root = HomePage;
   tab2Root = ShoppingCartPage;
-  tab3Root = CheckoutPage;
+  tab3Root = TransaksiPage;
+  tab4Root = SettingPage;
 
   constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams) {
     events.subscribe('user:logout', () => {

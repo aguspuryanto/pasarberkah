@@ -16,6 +16,8 @@ import { ProductDetailPage } from '../pages/product-detail/product-detail';
 import { ShoppingCartPage } from '../pages/shopping-cart/shopping-cart';
 import { ChatPage } from '../pages/chat/chat';
 import { CheckoutPage } from '../pages/checkout/checkout';
+import { SettingPage } from '../pages/setting/setting';
+import { TransaksiPage } from '../pages/transaksi/transaksi';
 
 import { CartService } from '../providers/cart.service';
 import { ProductService } from '../providers/product.service';
@@ -29,6 +31,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     ShoppingCartPage,
     ChatPage,
     CheckoutPage,
+    SettingPage,
+    TransaksiPage,
     TabsPage
   ],
   imports: [
@@ -46,6 +50,8 @@ import { TabsPage } from '../pages/tabs/tabs';
     ShoppingCartPage,
     ChatPage,
     CheckoutPage,
+    SettingPage,
+    TransaksiPage,
     TabsPage
   ],
   providers: [

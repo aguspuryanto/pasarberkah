@@ -1,51 +1,81 @@
 <ion-header>
-  <ion-navbar>
+  <ion-toolbar mode="ios">
+    <ion-title>PASARBERKAH</ion-title>
     <ion-buttons end>
       <button ion-button (click)="goToCart()" >
         <ion-icon name="cart"> {{cartCount}} </ion-icon>
       </button>
     </ion-buttons>
-    <ion-title>PASARBERKAH</ion-title>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>  
-  
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col col-6>
+        <ion-card no-padding>
+          <ion-item>
+            <ion-card-title>0</ion-card-title>
+            <p>Saldo</p>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card no-padding>
+          <ion-item>
+            <ion-card-title>0</ion-card-title>
+            <p>Transaksi</p>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <div class="header-banner">
     <ion-slides class="home-slide" autoplay="5000" loop="true" speed="500" class="slides" pager="true">
       <ion-slide *ngFor="let slide of slideData">
          <ion-card>
           <img src="{{slide.image}}" />
-          <ion-card-header>
+          <!-- <ion-card-header>
             <ion-card-title class="card-title">Slide 1</ion-card-title>
           </ion-card-header>
-          <ion-card-content>Madison, WI</ion-card-content>
+          <ion-card-content>Madison, WI</ion-card-content> -->
         </ion-card>
       </ion-slide>
     </ion-slides>
   </div>
 
   <!-- <ion-searchbar [(ngModel)]="filterText" (ionInput)="getItems()" ></ion-searchbar> -->
-  <p>{{ address }}</p>
-  <ion-list>
-    <ion-list-header>
-      <ion-label>Product</ion-label>
-      <button ion-button fill="clear">
-        <ion-icon name="options" slot="end"></ion-icon>
-      </button>
-    </ion-list-header>
-    <ion-grid>
-      <ion-row class="ion-align-items-center">
-        <ion-col size="6" col-6 class="product-col" *ngFor="let product of products" (click)="itemTapped($event,product)">
-          <ion-card>
-              <ionic-image-cache *ngIf="product.productImg" [showPreview]="'false'" [src]="product.productImg"></ionic-image-cache>
-              <ion-card-content>
-                  <ion-card-title text-wrap style="font-size: 1.4rem;">{{product.productName}}</ion-card-title>
-                  <div item-right>Rp. {{product.unitPrice | number }} </div>
-              </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+
+  <ion-list id="kategori">
+    <ion-list-header>Kategori</ion-list-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let item of categories" size="4" col-4 size-sm>
+            <ion-card no-padding>
+              <ion-card-content>{{item.categoryName}}</ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    <!-- </ion-item> -->
   </ion-list>
+
+  <ion-list>
+    <ion-list-header>Product</ion-list-header>
+  </ion-list>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col class="product-col" *ngFor="let product of products" (click)="itemTapped($event,product)" size="6" col-6 size-md>
+        <ion-card no-padding>
+            <ionic-image-cache *ngIf="product.productImg" [showPreview]="'false'" [src]="product.productImg"></ionic-image-cache>
+            <ion-card-content>
+                <ion-card-title text-wrap style="font-size: 1.4rem;">{{product.productName}}</ion-card-title>
+                <div item-right>Rp. {{product.unitPrice | number }} </div>
+            </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -10,10 +10,7 @@ page-home {
 
     .card-title-md { margin: 0px; padding: 0; }
 
-    .header-banner {
-        // height:150px;
-        // min-height:150px;
-        
+    .header-banner {        
         .slide-zoom {
             height: 100%;
 
@@ -25,11 +22,13 @@ page-home {
         }
     }
 
+    .list-header-md { border-bottom: 1px solid #dedede; }
+
     ion-slides {
-        height: 150px;
+        // height: 150px;
     }
 
     .header-banner ion-card {
-        height: 140px;
+        // height: 140px;
     }
 }

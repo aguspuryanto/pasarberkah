@@ -13,8 +13,7 @@ const routes: Routes = [
           children:
             [
               {
-                path: '',
-                loadChildren: '../home/home.module#HomePageModule'
+                path: '', loadChildren: '../tab1/tab1.module#Tab1PageModule'
               }
             ]
         },
@@ -23,8 +22,7 @@ const routes: Routes = [
           children:
             [
               {
-                path: '',
-                loadChildren: '../tab2/tab2.module#Tab2PageModule'
+                path: '', loadChildren: '../tab2/tab2.module#Tab2PageModule'
               }
             ]
         },
@@ -33,8 +31,7 @@ const routes: Routes = [
           children:
             [
               {
-                path: '',
-                loadChildren: '../tab3/tab3.module#Tab3PageModule'
+                path: '', loadChildren: '../tab3/tab3.module#Tab3PageModule'
               }
             ]
         },

@@ -3,5 +3,5 @@ page-shopping-cart {
     .item-block:last-child { border-bottom: 1px solid #ddd; }
     .item-inner { border-bottom: none !important; }
 
-    .list-md[inset] { margin: 0px; }
+    .list-md[inset], .list-md { margin: 0px; }
 }
